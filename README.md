@@ -211,6 +211,10 @@ outputting.
 
 ## 8. Acknowledgements
 Course: DS440 — (Penn State).
+
 Data: IPIP-NEO-120 dataset from Kaggle.
+
 Models: OpenAI GPT-4o-mini and Google Gemini 2.5 Flash.
+
 Thanks to our professor and TA for guidance and feedback throughout the project.
+
