@@ -44,3 +44,53 @@ LLM Survey Engine
 Scoring & Scaling
         ↓
 Visualization & Interpretation
+```
+
+## 2. Data
+2.1 Human Dataset (Kaggle: IPIP-NEO 120)
+
+Source: public Kaggle dataset of IPIP-NEO-120 scores.
+
+Each row = one participant, with:
+
+Demographics: sex, age, etc.
+
+Big Five domain scores: Openness, Conscientiousness, Extraversion, Agreeableness, Neuroticism.
+
+Preprocessing:
+
+load_human_scores():
+
+Reads the original CSV.
+
+Maps numeric sex to labels (1 → "male", 2 → "female") → sex_label.
+
+Bins age into groups such as 18–25, 26–35, … → age_bin.
+
+Filters out rows with missing or obviously invalid scores.
+
+## 3. Personas & Questionnaire
+# 3.1 IPIP-NEO-120 Items
+
+We build a DataFrame items_df representing the questionnaire:
+
+item_id: 1–120
+
+item_text: text of the item (here represented as “Item {i}” in the minimal version; can be replaced by full IPIP text if licensing permits).
+
+domain: which of the Big Five the item belongs to, via item_to_domain().
+
+reversed: whether the item is reverse-scored.
+
+This structure allows us to aggregate item-level scores into each Big Five domain.
+
+# 3.2 Persona Design
+
+We define several personas in a list PERSONAS.
+Each persona is a small dictionary, for example:
+
+describe_group(df, group_cols):
+
+Computes mean, standard deviation, and sample size for each domain within each group (e.g., by sex_label, age_bin).
+
+These group summaries provide the human baselines we compare LLM personas against.
